@@ -1,5 +1,5 @@
 
-# UXM
+# UXM 2.0
 Enables file modding for DS2, SotFS, and DS3 by unpacking game archives and patching the executable to load loose files instead.  
 Requires [.NET 4.7.2](https://www.microsoft.com/net/download/thank-you/net472) - Windows 10 users should already have this.  
 
