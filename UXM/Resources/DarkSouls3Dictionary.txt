@@ -10753,6 +10753,7 @@
 /msg/polpl/menu_dlc1.msgbnd.dcx
 /msg/polpl/menu_dlc2.msgbnd.dcx
 /msg/polpl/ngword.msgbnd.dcx
+/msg/porbr/item.msgbnd.dcx
 /msg/porbr/item_dlc1.msgbnd.dcx
 /msg/porbr/item_dlc2.msgbnd.dcx
 /msg/porbr/menu.msgbnd.dcx
@@ -10766,6 +10767,7 @@
 /msg/rusru/menu_dlc1.msgbnd.dcx
 /msg/rusru/menu_dlc2.msgbnd.dcx
 /msg/rusru/ngword.msgbnd.dcx
+/msg/spaar/item.msgbnd.dcx
 /msg/spaar/item_dlc1.msgbnd.dcx
 /msg/spaar/item_dlc2.msgbnd.dcx
 /msg/spaar/menu.msgbnd.dcx
@@ -10786,6 +10788,7 @@
 /msg/zhocn/menu_dlc1.msgbnd.dcx
 /msg/zhocn/menu_dlc2.msgbnd.dcx
 /msg/zhocn/ngword.msgbnd.dcx
+/msg/zhotw/item.msgbnd.dcx
 /msg/zhotw/item_dlc1.msgbnd.dcx
 /msg/zhotw/item_dlc2.msgbnd.dcx
 /msg/zhotw/menu.msgbnd.dcx
