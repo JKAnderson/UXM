@@ -11966,10 +11966,15 @@
 /obj/o990200.objbnd.dcx
 /obj/o999320.objbnd.dcx
 /obj/o999992.objbnd.dcx
+/other/bloodtex.tpf.dcx
+/other/cubegen.dds
+/other/cubegen_degamma.dds
 /other/decaltex.tpf.dcx
 /other/default.rumblebnd.dcx
 /other/gilm0010.dds
 /other/ingamestay.loadlist
+/other/modelviewer_default_iem.dds
+/other/modelviewer_default_rem.dds
 /other/movtae.movtae.dcx
 /other/partslist.bn
 /other/sysenvtex.tpf.dcx
@@ -15414,3 +15419,5 @@
 /sound/fdp_xm54.fev
 /sound/fdp_xm54.fsb
 /sound/fdp_xm54.itl
+/testdata/shaderbdle/shaderbdle.shaderbdlebnd.dcx
+/testdata/shaderbdle/shaderbdle.shaderbdlebnddebug.dcx

@@ -178,6 +178,7 @@ namespace UXM
         {
             "_unknown",
             "action",
+            "adhoc",
             "chr",
             "event",
             "facegen",
@@ -194,6 +195,7 @@ namespace UXM
             "script",
             "sfx",
             "shader",
+            "testdata",
         };
     }
 }

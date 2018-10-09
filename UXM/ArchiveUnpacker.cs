@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace UXM
 {
@@ -90,7 +91,16 @@ namespace UXM
 
             if (driveInfo.AvailableFreeSpace < requiredGB * 1024 * 1024 * 1024)
             {
-                return $"At least {requiredGB} GB of free space is required to unpack this game.";
+                DialogResult choice = MessageBox.Show(
+                    $"{requiredGB} GB of free space is required to fully unpack this game; " +
+                    $"only {driveInfo.AvailableFreeSpace / (1024f * 1024 * 1024):F1} GB available.\r\n" +
+                    "If you're only doing a partial unpack to restore some files you may ignore this warning, " +
+                    "otherwise it will most likely fail.\r\n\r\n" +
+                    "Do you want to continue?",
+                    "Space Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (choice == DialogResult.No)
+                    return null;
             }
 
             if (ct.IsCancellationRequested)
@@ -299,7 +309,7 @@ namespace UXM
             return length;
         }
 
-        private const long DARKSOULS2_GB = 1;
+        private const long DARKSOULS2_GB = 16;
 
         private static List<string> darkSouls2Archives = new List<string>
         {
@@ -318,7 +328,7 @@ namespace UXM
             "sound",
         };
 
-        private const long SCHOLAR_GB = 1;
+        private const long SCHOLAR_GB = 18;
 
         private static List<string> scholarArchives = new List<string>
         {
