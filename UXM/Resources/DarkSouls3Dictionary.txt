@@ -9463,7 +9463,6 @@
 /menu/05_905_logo_copyright.gfx
 /menu/05_dummy.tpf.dcx
 /menu/06_platform.tpf.dcx
-/menu/53_216_inventory_commandlist.gfx
 /menu/deude/80_language.tpf.dcx
 /menu/engus/80_language.tpf.dcx
 /menu/frafr/80_language.tpf.dcx
@@ -10692,6 +10691,7 @@
 /menu/win/02_040_optionsetting.gfx
 /menu/win/02_041_pc_mousesetting.gfx
 /menu/win/02_042_pc_graphicsetting.gfx
+/menu/win/02_043_pc_keyconfiguration.gfx
 /menu/win/02_044_pc_textselect.gfx
 /menu/win/02_045_pc_commandlist.gfx
 /menu/win/02_110_detailkeyguide.gfx
