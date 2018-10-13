@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<game_info>
+  <required_gb>18</required_gb>
+  <bindertool_version>DarkSouls2</bindertool_version>
+  <archives>
+    <archive>GameDataEbl</archive>
+    <archive>LqChrEbl</archive>
+    <archive>LqMapEbl</archive>
+    <archive>LqObjEbl</archive>
+    <archie>LqPartsEbl</archie>
+  </archives>
+  <backup_dirs>
+    <backup>param</backup>
+    <backup>sfx</backup>
+    <backup>sfx_lq</backup>
+    <backup>sound</backup>
+  </backup_dirs>
+  <delete_dirs>
+    <delete>_unknown</delete>
+    <delete>breakobj</delete>
+    <delete>decal</delete>
+    <delete>eventmakerex</delete>
+    <delete>ezstate</delete>
+    <delete>filter</delete>
+    <delete>map</delete>
+    <delete>material</delete>
+    <delete>menu</delete>
+    <delete>model</delete>
+    <delete>model_lq</delete>
+    <delete>morpheme4</delete>
+    <delete>prefabeditor</delete>
+    <delete>timeact</delete>
+  </delete_dirs>
+  <replacements>
+    <replacement>gamedata:/=dlc_root:/</replacement>
+    <replacement>chrlq:/=title:/</replacement>
+    <replacement>maplq:/=title:/</replacement>
+    <replacement>objlq:/=title:/</replacement>
+    <replacement>partslq:/=title:/./</replacement>
+  </replacements>
+</game_info>

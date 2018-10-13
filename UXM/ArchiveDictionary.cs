@@ -7,7 +7,8 @@ namespace UXM
     class ArchiveDictionary
     {
         private const uint prime = 37;
-        private static Dictionary<uint, string> hashes;
+
+        private Dictionary<uint, string> hashes;
 
         public ArchiveDictionary(string dictionary)
         {

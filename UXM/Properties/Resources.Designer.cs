@@ -61,7 +61,22 @@ namespace UXM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to /breakobj/m10_02_00_00.breakobj
+        ////breakobj/m10_04_00_00.breakobj
+        ////breakobj/m10_10_00_00.breakobj
+        ////breakobj/m10_14_00_00.breakobj
+        ////breakobj/m10_15_00_00.breakobj
+        ////breakobj/m10_16_00_00.breakobj
+        ////breakobj/m10_17_00_00.breakobj
+        ////breakobj/m10_18_00_00.breakobj
+        ////breakobj/m10_19_00_00.breakobj
+        ////breakobj/m10_23_00_00.breakobj
+        ////breakobj/m10_25_00_00.breakobj
+        ////breakobj/m10_27_00_00.breakobj
+        ////breakobj/m10_29_00_00.breakobj
+        ////breakobj/m10_30_00_00.breakobj
+        ////breakobj/m10_31_00_00.breakobj
+        ////breakobj/m10_32_ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DarkSouls2Dictionary {
             get {
@@ -72,6 +87,34 @@ namespace UXM.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string DarkSouls2GameInfo {
+            get {
+                return ResourceManager.GetString("DarkSouls2GameInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /action/eventnameid.txt
+        ////action/script/c0000.hks
+        ////action/script/c0001.hks
+        ////action/script/c0002.hks
+        ////action/script/c0004.hks
+        ////action/script/c0006.hks
+        ////action/script/c0100.hks
+        ////action/script/c1030.hks
+        ////action/script/c1040.hks
+        ////action/script/c1041.hks
+        ////action/script/c1050.hks
+        ////action/script/c1060.hks
+        ////action/script/c1070.hks
+        ////action/script/c1090.hks
+        ////action/script/c1100.hks
+        ////action/script/c1105.hks
+        ////action/script/c1110.hks
+        ////action/script/c1120.hks
+        ////action/script/c1130.hks
+        ////action/script/c113 [rest of string was truncated]&quot;;.
+        /// </summary>
         internal static string DarkSouls3Dictionary {
             get {
                 return ResourceManager.GetString("DarkSouls3Dictionary", resourceCulture);
@@ -81,9 +124,61 @@ namespace UXM.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string DarkSouls3GameInfo {
+            get {
+                return ResourceManager.GetString("DarkSouls3GameInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /breakobj/m10_02_00_00.breakobj
+        ////breakobj/m10_04_00_00.breakobj
+        ////breakobj/m10_10_00_00.breakobj
+        ////breakobj/m10_14_00_00.breakobj
+        ////breakobj/m10_15_00_00.breakobj
+        ////breakobj/m10_16_00_00.breakobj
+        ////breakobj/m10_17_00_00.breakobj
+        ////breakobj/m10_18_00_00.breakobj
+        ////breakobj/m10_19_00_00.breakobj
+        ////breakobj/m10_23_00_00.breakobj
+        ////breakobj/m10_25_00_00.breakobj
+        ////breakobj/m10_27_00_00.breakobj
+        ////breakobj/m10_29_00_00.breakobj
+        ////breakobj/m10_30_00_00.breakobj
+        ////breakobj/m10_31_00_00.breakobj
+        ////breakobj/m10_32_ [rest of string was truncated]&quot;;.
+        /// </summary>
         internal static string ScholarDictionary {
             get {
                 return ResourceManager.GetString("ScholarDictionary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;game_info&gt;
+        ///  &lt;required_size&gt;18&lt;/required_size&gt;
+        ///  &lt;archives&gt;
+        ///    &lt;archive&gt;GameDataEbl&lt;/archive&gt;
+        ///    &lt;archive&gt;LqChrEbl&lt;/archive&gt;
+        ///    &lt;archive&gt;LqMapEbl&lt;/archive&gt;
+        ///    &lt;archive&gt;LqObjEbl&lt;/archive&gt;
+        ///    &lt;archie&gt;LqPartsEbl&lt;/archie&gt;
+        ///  &lt;/archives&gt;
+        ///  &lt;backup_dirs&gt;
+        ///    &lt;backup&gt;param&lt;/backup&gt;
+        ///    &lt;backup&gt;sfx&lt;/backup&gt;
+        ///    &lt;backup&gt;sfx_lq&lt;/backup&gt;
+        ///    &lt;backup&gt;sound&lt;/backup&gt;
+        ///  &lt;/backup_dirs&gt;
+        ///  &lt;delete_dirs&gt;
+        ///    &lt;delete&gt;_unknown&lt;/delete&gt;
+        ///    &lt;delete&gt;breakobj&lt;/delete&gt;
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ScholarGameInfo {
+            get {
+                return ResourceManager.GetString("ScholarGameInfo", resourceCulture);
             }
         }
     }

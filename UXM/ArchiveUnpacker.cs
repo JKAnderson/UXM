@@ -24,53 +24,24 @@ namespace UXM
             string gameDir = Path.GetDirectoryName(exePath);
 
             Util.Game game;
+            GameInfo gameInfo;
             try
             {
                 game = Util.GetExeVersion(exePath);
+                gameInfo = GameInfo.GetGameInfo(game);
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
 
-            GameVersion gameVersion = GameVersion.Common;
-            long requiredGB = 0;
-            List<string> backupDirs = null;
-            List<string> archives = null;
-            ArchiveDictionary archiveDictionary = null;
             Dictionary<string, string> keys = null;
-
-            if (game == Util.Game.DarkSouls2)
-            {
-                gameVersion = GameVersion.DarkSouls2;
-                requiredGB = DARKSOULS2_GB;
-                backupDirs = darkSouls2Backups;
-                archives = darkSouls2Archives;
-                archiveDictionary = new ArchiveDictionary(Properties.Resources.DarkSouls2Dictionary);
-            }
-            else if (game == Util.Game.Scholar)
-            {
-                gameVersion = GameVersion.DarkSouls2;
-                requiredGB = SCHOLAR_GB;
-                backupDirs = scholarBackups;
-                archives = scholarArchives;
-                archiveDictionary = new ArchiveDictionary(Properties.Resources.ScholarDictionary);
-            }
-            else if (game == Util.Game.DarkSouls3)
-            {
-                gameVersion = GameVersion.DarkSouls3;
-                requiredGB = DARKSOULS3_GB;
-                backupDirs = darkSouls3Backups;
-                archives = darkSouls3Archives;
-                archiveDictionary = new ArchiveDictionary(Properties.Resources.DarkSouls3Dictionary);
-            }
-
             if (game == Util.Game.DarkSouls2 || game == Util.Game.Scholar)
             {
                 try
                 {
                     keys = new Dictionary<string, string>();
-                    foreach (string archive in archives)
+                    foreach (string archive in gameInfo.Archives)
                     {
                         string pemPath = gameDir + "\\" + archive.Replace("Ebl", "KeyCode") + ".pem";
                         keys[archive] = File.ReadAllText(pemPath);
@@ -89,10 +60,10 @@ namespace UXM
             string drive = Path.GetPathRoot(Path.GetFullPath(gameDir));
             DriveInfo driveInfo = new DriveInfo(drive);
 
-            if (driveInfo.AvailableFreeSpace < requiredGB * 1024 * 1024 * 1024)
+            if (driveInfo.AvailableFreeSpace < gameInfo.RequiredGB * 1024 * 1024 * 1024)
             {
                 DialogResult choice = MessageBox.Show(
-                    $"{requiredGB} GB of free space is required to fully unpack this game; " +
+                    $"{gameInfo.RequiredGB} GB of free space is required to fully unpack this game; " +
                     $"only {driveInfo.AvailableFreeSpace / (1024f * 1024 * 1024):F1} GB available.\r\n" +
                     "If you're only doing a partial unpack to restore some files you may ignore this warning, " +
                     "otherwise it will most likely fail.\r\n\r\n" +
@@ -108,11 +79,11 @@ namespace UXM
 
             try
             {
-                for (int i = 0; i < backupDirs.Count; i++)
+                for (int i = 0; i < gameInfo.BackupDirs.Count; i++)
                 {
-                    string backup = backupDirs[i];
-                    progress.Report(((1.0 + (double)i / backupDirs.Count) / (archives.Count + 2.0),
-                        $"Backing up directory \"{backup}\" ({i + 1}/{backupDirs.Count})..."));
+                    string backup = gameInfo.BackupDirs[i];
+                    progress.Report(((1.0 + (double)i / gameInfo.BackupDirs.Count) / (gameInfo.Archives.Count + 2.0),
+                        $"Backing up directory \"{backup}\" ({i + 1}/{gameInfo.BackupDirs.Count})..."));
 
                     string backupSource = gameDir + "\\" + backup;
                     string backupTarget = gameDir + "\\_backup\\" + backup;
@@ -134,13 +105,14 @@ namespace UXM
                 return $"Failed to back up directories.\r\n\r\n{ex}";
             }
 
-            for (int i = 0; i < archives.Count; i++)
+            for (int i = 0; i < gameInfo.Archives.Count; i++)
             {
                 if (ct.IsCancellationRequested)
                     return null;
 
-                string archive = archives[i];
-                string error = UnpackArchive(gameDir, archive, keys[archive], i, archives.Count, gameVersion, archiveDictionary, progress, ct).Result;
+                string archive = gameInfo.Archives[i];
+                string error = UnpackArchive(gameDir, archive, keys[archive], i,
+                    gameInfo.Archives.Count, gameInfo.BinderToolVersion, gameInfo.Dictionary, progress, ct).Result;
                 if (error != null)
                     return error;
             }
@@ -308,61 +280,5 @@ namespace UXM
             ms.Dispose();
             return length;
         }
-
-        private const long DARKSOULS2_GB = 16;
-
-        private static List<string> darkSouls2Archives = new List<string>
-        {
-            "GameDataEbl",
-            "HqChrEbl",
-            "HqMapEbl",
-            "HqObjEbl",
-            "HqPartsEbl",
-        };
-
-        private static List<string> darkSouls2Backups = new List<string>
-        {
-            "param",
-            "sfx",
-            "sfx_hq",
-            "sound",
-        };
-
-        private const long SCHOLAR_GB = 18;
-
-        private static List<string> scholarArchives = new List<string>
-        {
-            "GameDataEbl",
-            "LqChrEbl",
-            "LqMapEbl",
-            "LqObjEbl",
-            "LqPartsEbl",
-        };
-
-        private static List<string> scholarBackups = new List<string>
-        {
-            "param",
-            "sfx",
-            "sfx_lq",
-            "sound",
-        };
-
-        private const long DARKSOULS3_GB = 25;
-
-        private static List<string> darkSouls3Archives = new List<string>
-        {
-            "Data1",
-            "Data2",
-            "Data3",
-            "Data4",
-            "Data5",
-            "DLC1",
-            "DLC2",
-        };
-
-        private static List<string> darkSouls3Backups = new List<string>
-        {
-            "sound",
-        };
     }
 }

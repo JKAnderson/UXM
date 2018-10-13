@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
@@ -14,9 +13,11 @@ namespace UXM
             string exeName = Path.GetFileName(exePath);
 
             Util.Game game;
+            GameInfo gameInfo;
             try
             {
                 game = Util.GetExeVersion(exePath);
+                gameInfo = GameInfo.GetGameInfo(game);
             }
             catch (Exception ex)
             {
@@ -39,31 +40,12 @@ namespace UXM
             if (ct.IsCancellationRequested)
                 return null;
 
-            List<string> restoreDirs = null;
-            List<string> deleteDirs = null;
+            double totalSteps = gameInfo.BackupDirs.Count + gameInfo.DeleteDirs.Count + 1;
 
-            if (game == Util.Game.DarkSouls2)
+            for (int i = 0; i < gameInfo.BackupDirs.Count; i++)
             {
-                restoreDirs = darkSouls2RestoreDirs;
-                deleteDirs = darkSouls2DeleteDirs;
-            }
-            else if (game == Util.Game.Scholar)
-            {
-                restoreDirs = scholarRestoreDirs;
-                deleteDirs = scholarDeleteDirs;
-            }
-            else if (game == Util.Game.DarkSouls3)
-            {
-                restoreDirs = darkSouls3RestoreDirs;
-                deleteDirs = darkSouls3DeleteDirs;
-            }
-
-            double totalSteps = restoreDirs.Count + deleteDirs.Count + 1;
-
-            for (int i = 0; i < restoreDirs.Count; i++)
-            {
-                string restore = restoreDirs[i];
-                progress.Report(((i + 1.0) / totalSteps, $"Restoring directory \"{restore}\" ({i + 1}/{restoreDirs.Count})..."));
+                string restore = gameInfo.BackupDirs[i];
+                progress.Report(((i + 1.0) / totalSteps, $"Restoring directory \"{restore}\" ({i + 1}/{gameInfo.BackupDirs.Count})..."));
 
                 string restoreSource = gameDir + "\\_backup\\" + restore;
                 string restoreTarget = gameDir + "\\" + restore;
@@ -85,11 +67,11 @@ namespace UXM
 
             try
             {
-                for (int i = 0; i < deleteDirs.Count; i++)
+                for (int i = 0; i < gameInfo.DeleteDirs.Count; i++)
                 {
-                    string dir = deleteDirs[i];
+                    string dir = gameInfo.DeleteDirs[i];
 
-                    progress.Report(((i + 1.0 + restoreDirs.Count) / totalSteps, $"Deleting directory \"{dir}\" ({i + 1}/{deleteDirs.Count})..."));
+                    progress.Report(((i + 1.0 + gameInfo.BackupDirs.Count) / totalSteps, $"Deleting directory \"{dir}\" ({i + 1}/{gameInfo.DeleteDirs.Count})..."));
 
                     if (ct.IsCancellationRequested)
                         return null;
@@ -116,86 +98,5 @@ namespace UXM
             progress.Report((1, "Restoration complete!"));
             return null;
         }
-
-        private static List<string> darkSouls2RestoreDirs = new List<string>
-        {
-            "param",
-            "sfx",
-            "sfx_hq",
-            "sound",
-        };
-
-        private static List<string> darkSouls2DeleteDirs = new List<string>
-        {
-            "_unknown",
-            "breakobj",
-            "decal",
-            "eventmakerex",
-            "ezstate",
-            "filter",
-            "map",
-            "material",
-            "menu",
-            "model",
-            "model_hq",
-            "morpheme4",
-            "prefabeditor",
-            "timeact",
-        };
-
-        private static List<string> scholarRestoreDirs = new List<string>
-        {
-            "param",
-            "sfx",
-            "sfx_lq",
-            "sound",
-        };
-
-        private static List<string> scholarDeleteDirs = new List<string>
-        {
-            "_unknown",
-            "breakobj",
-            "decal",
-            "eventmakerex",
-            "ezstate",
-            "filter",
-            "map",
-            "material",
-            "menu",
-            "model",
-            "model_lq",
-            "morpheme4",
-            "prefabeditor",
-            "timeact",
-        };
-
-        private static List<string> darkSouls3RestoreDirs = new List<string>
-        {
-            "sound",
-        };
-
-        private static List<string> darkSouls3DeleteDirs = new List<string>
-        {
-            "_unknown",
-            "action",
-            "adhoc",
-            "chr",
-            "event",
-            "facegen",
-            "font",
-            "map",
-            "menu",
-            "msg",
-            "mtd",
-            "obj",
-            "other",
-            "param",
-            "parts",
-            "remo",
-            "script",
-            "sfx",
-            "shader",
-            "testdata",
-        };
     }
 }

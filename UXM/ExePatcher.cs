@@ -17,9 +17,11 @@ namespace UXM
             string exeName = Path.GetFileName(exePath);
 
             Util.Game game;
+            GameInfo gameInfo;
             try
             {
                 game = Util.GetExeVersion(exePath);
+                gameInfo = GameInfo.GetGameInfo(game);
             }
             catch (Exception ex)
             {
@@ -49,28 +51,20 @@ namespace UXM
                 return $"Failed to read file:\r\n{exePath}\r\n\r\n{ex}";
             }
 
-            Dictionary<string, string> replacements = null;
-            if (game == Util.Game.DarkSouls2)
-                replacements = darkSouls2Replacements;
-            else if (game == Util.Game.Scholar)
-                replacements = scholarReplacements;
-            else if (game == Util.Game.DarkSouls3)
-                replacements = darkSouls3Replacements;
-
             try
             {
-                var keys = new List<string>(replacements.Keys);
-                for (int i = 0; i < keys.Count; i++)
+                for (int i = 0; i < gameInfo.Replacements.Count; i++)
                 {
                     if (ct.IsCancellationRequested)
                         return null;
 
-                    string key = keys[i];
+                    string target = gameInfo.Replacements[i].Target;
+                    string replacement = gameInfo.Replacements[i].Replacement;
 
                     // Add 1.0 for preparation step
-                    progress.Report(((i + 1.0) / (keys.Count + 1.0), $"Patching alias \"{key}\" ({i + 1}/{keys.Count})..."));
+                    progress.Report(((i + 1.0) / (gameInfo.Replacements.Count + 1.0), $"Patching alias \"{target}\" ({i + 1}/{gameInfo.Replacements.Count})..."));
 
-                    replace(bytes, key, replacements[key]);
+                    replace(bytes, target, replacement);
                 }
             }
             catch (Exception ex)
@@ -123,34 +117,5 @@ namespace UXM
             }
             return offsets;
         }
-
-        private static Dictionary<string, string> darkSouls2Replacements = new Dictionary<string, string>
-        {
-            ["gamedata:/"] = "dlc_root:/",
-            ["chrhq:/"] = "title:/",
-            ["maphq:/"] = "title:/",
-            ["objhq:/"] = "title:/",
-            ["partshq:/"] = "title:/./",
-        };
-
-        private static Dictionary<string, string> scholarReplacements = new Dictionary<string, string>
-        {
-            ["gamedata:/"] = "dlc_root:/",
-            ["chrlq:/"] = "title:/",
-            ["maplq:/"] = "title:/",
-            ["objlq:/"] = "title:/",
-            ["partslq:/"] = "title:/./",
-        };
-
-        private static Dictionary<string, string> darkSouls3Replacements = new Dictionary<string, string>
-        {
-            ["data1:/"] = "debug:/",
-            ["data2:/"] = "debug:/",
-            ["data3:/"] = "debug:/",
-            ["data4:/"] = "debug:/",
-            ["data5:/"] = "debug:/",
-            ["game_dlc1:/"] = "interroot:/",
-            ["game_dlc2:/"] = "interroot:/",
-        };
     }
 }
