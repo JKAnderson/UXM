@@ -1,5 +1,5 @@
 
---| UXM 2.0
+--| UXM 2.1
 --| By TKGP
 --| https://www.nexusmods.com/darksouls3/mods/286
 --| https://github.com/JKAnderson/UXM
@@ -41,6 +41,10 @@ https://github.com/maxhauser/semver
 
 
 --| Changelog
+
+2.1
+	Fix keybinding menu being broken because of a false positive
+	Identify all but 1 file in DS3 (and support release version better)
 
 2.0
 	U3M has been mostly rewritten and is now UXM
