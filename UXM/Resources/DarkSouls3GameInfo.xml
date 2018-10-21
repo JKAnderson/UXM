@@ -43,6 +43,6 @@
     <replacement>data4:/=debug:/</replacement>
     <replacement>data5:/=debug:/</replacement>
     <replacement>game_dlc1:/=interroot:/</replacement>
-    <replacement>game_dlc1:/=interroot:/</replacement>
+    <replacement>game_dlc2:/=interroot:/</replacement>
   </replacements>
 </game_info>
