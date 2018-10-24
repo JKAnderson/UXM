@@ -1,5 +1,5 @@
 
-# UXM 2.1
+# UXM 2.1.1
 Enables file modding for DS2, SotFS, and DS3 by unpacking game archives and patching the executable to load loose files instead.  
 Requires [.NET 4.7.2](https://www.microsoft.com/net/download/thank-you/net472) - Windows 10 users should already have this.  
 
@@ -25,6 +25,9 @@ UXM only edits data within the executable, not code, so anticheat should have no
 [Semver](https://github.com/maxhauser/semver) by Max Hauser
 
 # Changelog
+### 2.1.1
+* Fix DLC2 files still being loaded from archive (just click Patch again to fix it)
+
 ### 2.1
 * Fix keybinding menu being broken because of a false positive
 * Identify all but 1 file in DS3 (and support release version better)

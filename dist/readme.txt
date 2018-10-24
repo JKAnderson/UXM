@@ -1,5 +1,5 @@
 
---| UXM 2.1
+--| UXM 2.1.1
 --| By TKGP
 --| https://www.nexusmods.com/darksouls3/mods/286
 --| https://github.com/JKAnderson/UXM
@@ -41,6 +41,9 @@ https://github.com/maxhauser/semver
 
 
 --| Changelog
+
+2.1.1
+	Fix DLC2 files still being loaded from archive (just click Patch again to fix it)
 
 2.1
 	Fix keybinding menu being broken because of a false positive
