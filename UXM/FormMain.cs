@@ -64,6 +64,11 @@ namespace UXM
             }
         }
 
+        private void llbUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData.ToString());
+        }
+
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (cts != null)

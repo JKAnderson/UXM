@@ -178,6 +178,7 @@
             this.llbUpdate.Text = "New version available!";
             this.llbUpdate.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.llbUpdate.Visible = false;
+            this.llbUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbUpdate_LinkClicked);
             // 
             // txtStatus
             // 
@@ -210,7 +211,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 196);
-            this.Controls.Add(this.lblUpdate);
             this.Controls.Add(this.llbUpdate);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(lblStatus);
@@ -224,6 +224,7 @@
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtExePath);
             this.Controls.Add(lblExePath);
+            this.Controls.Add(this.lblUpdate);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(2000, 234);
             this.MinimumSize = new System.Drawing.Size(357, 234);
