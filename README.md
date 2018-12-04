@@ -1,5 +1,5 @@
 
-# UXM 2.1.2
+# UXM
 Enables file modding for DS2, SotFS, and DS3 by unpacking game archives and patching the executable to load loose files instead.  
 Requires [.NET 4.7.2](https://www.microsoft.com/net/download/thank-you/net472) - Windows 10 users should already have this.  
 
@@ -25,6 +25,9 @@ UXM only edits data within the executable, not code, so anticheat should have no
 [Semver](https://github.com/maxhauser/semver) by Max Hauser
 
 # Changelog
+### 2.1.3
+* Support unpacking decrypted archives for BootBoost compatibility
+
 ### 2.1.2
 * Fix the update link in the app not actually doing anything
 

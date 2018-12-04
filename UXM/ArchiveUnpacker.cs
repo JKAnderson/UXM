@@ -134,9 +134,27 @@ namespace UXM
                 Bhd5File bhd;
                 try
                 {
-                    using (MemoryStream bhdStream = CryptographyUtility.DecryptRsa(bhdPath, key))
+                    bool encrypted = true;
+                    using (FileStream fs = File.OpenRead(bhdPath))
                     {
-                        bhd = Bhd5File.Read(bhdStream, gameVersion);
+                        byte[] magic = new byte[4];
+                        fs.Read(magic, 0, 4);
+                        encrypted = ASCII.GetString(magic) != "BHD5";
+                    }
+
+                    if (encrypted)
+                    {
+                        using (MemoryStream bhdStream = CryptographyUtility.DecryptRsa(bhdPath, key))
+                        {
+                            bhd = Bhd5File.Read(bhdStream, gameVersion);
+                        }
+                    }
+                    else
+                    {
+                        using (FileStream bhdStream = File.OpenRead(bhdPath))
+                        {
+                            bhd = Bhd5File.Read(bhdStream, gameVersion);
+                        }
                     }
                 }
                 catch (Exception ex)

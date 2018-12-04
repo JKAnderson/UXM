@@ -1,5 +1,5 @@
 
---| UXM 2.1.2
+--| UXM 2.1.3
 --| By TKGP
 --| https://www.nexusmods.com/darksouls3/mods/286
 --| https://github.com/JKAnderson/UXM
@@ -41,6 +41,9 @@ https://github.com/maxhauser/semver
 
 
 --| Changelog
+
+2.1.3
+	Support unpacking decrypted archives for BootBoost compatibility
 
 2.1.2
 	Fix the update link in the app not actually doing anything
