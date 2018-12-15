@@ -4251,6 +4251,7 @@
 /map/m32_00_00_00/m32_00_00_00_960000.mapbnd.dcx
 /map/m33/gi_env_m33.tpfbdt
 /map/m33/gi_env_m33.tpfbhd
+/map/m33/gi_envrow_m33_00_0000.dds
 /map/m33/m33_0000.tpfbdt
 /map/m33/m33_0000.tpfbhd
 /map/m33/m33_0001.tpfbdt
