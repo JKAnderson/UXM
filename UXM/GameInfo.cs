@@ -1,4 +1,4 @@
-﻿using BinderTool.Core;
+﻿using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace UXM
     class GameInfo
     {
         public long RequiredGB;
-        public GameVersion BinderToolVersion;
+        public BHD5.Game BHD5Game;
         public List<string> Archives;
         public ArchiveDictionary Dictionary;
         public List<string> BackupDirs;
@@ -22,7 +22,7 @@ namespace UXM
 
             XDocument xml = XDocument.Parse(xmlStr);
             RequiredGB = long.Parse(xml.Root.Element("required_gb").Value);
-            BinderToolVersion = (GameVersion)Enum.Parse(typeof(GameVersion), xml.Root.Element("bindertool_version").Value);
+            BHD5Game = (BHD5.Game)Enum.Parse(typeof(BHD5.Game), xml.Root.Element("bhd5_game").Value);
             Archives = xml.Root.Element("archives").Elements().Select(element => element.Value).ToList();
             BackupDirs = xml.Root.Element("backup_dirs").Elements().Select(element => element.Value).ToList();
             DeleteDirs = xml.Root.Element("delete_dirs").Elements().Select(element => element.Value).ToList();

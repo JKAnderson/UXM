@@ -1,7 +1,4 @@
-﻿using BinderTool.Core;
-using BinderTool.Core.Bdt5;
-using BinderTool.Core.Bhd5;
-using BinderTool.Core.Dcx;
+﻿using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -112,7 +109,7 @@ namespace UXM
 
                 string archive = gameInfo.Archives[i];
                 string error = UnpackArchive(gameDir, archive, keys[archive], i,
-                    gameInfo.Archives.Count, gameInfo.BinderToolVersion, gameInfo.Dictionary, progress, ct).Result;
+                    gameInfo.Archives.Count, gameInfo.BHD5Game, gameInfo.Dictionary, progress, ct).Result;
                 if (error != null)
                     return error;
             }
@@ -122,7 +119,7 @@ namespace UXM
         }
 
         private static async Task<string> UnpackArchive(string gameDir, string archive, string key, int index, int total,
-            GameVersion gameVersion, ArchiveDictionary archiveDictionary,
+            BHD5.Game gameVersion, ArchiveDictionary archiveDictionary,
             IProgress<(double value, string status)> progress, CancellationToken ct)
         {
             progress.Report(((index + 2.0) / (total + 2.0), $"Loading {archive}..."));
@@ -131,7 +128,7 @@ namespace UXM
 
             if (File.Exists(bhdPath) && File.Exists(bdtPath))
             {
-                Bhd5File bhd;
+                BHD5 bhd;
                 try
                 {
                     bool encrypted = true;
@@ -146,14 +143,14 @@ namespace UXM
                     {
                         using (MemoryStream bhdStream = CryptographyUtility.DecryptRsa(bhdPath, key))
                         {
-                            bhd = Bhd5File.Read(bhdStream, gameVersion);
+                            bhd = BHD5.Read(bhdStream, gameVersion);
                         }
                     }
                     else
                     {
                         using (FileStream bhdStream = File.OpenRead(bhdPath))
                         {
-                            bhd = Bhd5File.Read(bhdStream, gameVersion);
+                            bhd = BHD5.Read(bhdStream, gameVersion);
                         }
                     }
                 }
@@ -162,24 +159,22 @@ namespace UXM
                     return $"Failed to open BHD:\n{bhdPath}\n\n{ex}";
                 }
 
-                int fileCount = 0;
-                foreach (Bhd5Bucket bucket in bhd.GetBuckets())
-                    fileCount += bucket.GetEntries().Count();
+                int fileCount = bhd.Buckets.Sum(b => b.Count);
 
                 try
                 {
                     var asyncFileWriters = new List<Task<long>>();
-                    using (Bdt5FileStream bdt = Bdt5FileStream.OpenFile(bdtPath, FileMode.Open, FileAccess.Read))
+                    using (FileStream bdtStream = File.OpenRead(bdtPath))
                     {
                         int currentFile = -1;
                         long writingSize = 0;
 
-                        foreach (Bhd5Bucket bucket in bhd.GetBuckets())
+                        foreach (BHD5.Bucket bucket in bhd.Buckets)
                         {
                             if (ct.IsCancellationRequested)
                                 break;
 
-                            foreach (Bhd5BucketEntry entry in bucket.GetEntries())
+                            foreach (BHD5.FileHeader header in bucket)
                             {
                                 if (ct.IsCancellationRequested)
                                     break;
@@ -187,13 +182,13 @@ namespace UXM
                                 currentFile++;
 
                                 string path;
-                                if (archiveDictionary.GetPath(entry.FileNameHash, out path))
+                                if (archiveDictionary.GetPath(header.FileNameHash, out path))
                                 {
                                     path = gameDir + path.Replace('/', '\\');
                                 }
                                 else
                                 {
-                                    path = $"{gameDir}\\_unknown\\{archive}_{entry.FileNameHash:D10}";
+                                    path = $"{gameDir}\\_unknown\\{archive}_{header.FileNameHash:D10}";
                                 }
 
                                 if (File.Exists(path))
@@ -202,30 +197,7 @@ namespace UXM
                                 progress.Report(((index + 2.0 + currentFile / (double)fileCount) / (total + 2.0),
                                     $"Unpacking {archive} ({currentFile + 1}/{fileCount})..."));
 
-                                if (entry.FileSize == 0)
-                                {
-                                    MemoryStream header = bdt.Read(entry.FileOffset, 48);
-                                    if (entry.IsEncrypted)
-                                    {
-                                        MemoryStream disposer = header;
-                                        header = CryptographyUtility.DecryptAesEcb(header, entry.AesKey.Key);
-                                        disposer.Dispose();
-                                    }
-
-                                    byte[] signatureBytes = new byte[4];
-                                    header.Read(signatureBytes, 0, 4);
-                                    string signature = ASCII.GetString(signatureBytes);
-                                    if (signature != DcxFile.DcxSignature)
-                                    {
-                                        throw new Exception("Zero-length entry is not DCX in BHD:\r\n" + bhdPath);
-                                    }
-
-                                    header.Position = 0;
-                                    entry.FileSize = DcxFile.DcxSize + DcxFile.ReadCompressedSize(header);
-                                    header.Dispose();
-                                }
-
-                                while (asyncFileWriters.Count > 0 && writingSize + entry.FileSize > WRITE_LIMIT)
+                                while (asyncFileWriters.Count > 0 && writingSize + header.PaddedFileSize > WRITE_LIMIT)
                                 {
                                     for (int i = 0; i < asyncFileWriters.Count; i++)
                                     {
@@ -236,30 +208,27 @@ namespace UXM
                                         }
                                     }
 
-                                    if (asyncFileWriters.Count > 0 && writingSize + entry.FileSize > WRITE_LIMIT)
+                                    if (asyncFileWriters.Count > 0 && writingSize + header.PaddedFileSize > WRITE_LIMIT)
                                         Thread.Sleep(10);
                                 }
 
-                                MemoryStream data;
-                                if (entry.IsEncrypted)
+                                byte[] bytes;
+                                try
                                 {
-                                    data = bdt.Read(entry.FileOffset, entry.PaddedFileSize);
-                                    CryptographyUtility.DecryptAesEcb(data, entry.AesKey.Key, entry.AesKey.Ranges);
-                                    data.Position = 0;
-                                    data.SetLength(entry.FileSize);
+                                    bytes = header.ReadFile(bdtStream);
                                 }
-                                else
+                                catch (EntryPointNotFoundException ex)
                                 {
-                                    data = bdt.Read(entry.FileOffset, entry.FileSize);
+                                    return $"Failed to read file:\r\n{path}\r\n\r\n{ex}";
                                 }
 
                                 try
                                 {
                                     Directory.CreateDirectory(Path.GetDirectoryName(path));
-                                    writingSize += data.Length;
-                                    asyncFileWriters.Add(WriteFileAsync(path, data));
+                                    writingSize += bytes.Length;
+                                    asyncFileWriters.Add(WriteFileAsync(path, bytes));
                                 }
-                                catch (Exception ex)
+                                catch (EntryPointNotFoundException ex)
                                 {
                                     return $"Failed to write file:\r\n{path}\r\n\r\n{ex}";
                                 }
@@ -270,7 +239,7 @@ namespace UXM
                     foreach (Task<long> task in asyncFileWriters)
                         await task;
                 }
-                catch (Exception ex)
+                catch (EntryPointNotFoundException ex)
                 {
                     return $"Failed to unpack BDT:\r\n{bdtPath}\r\n\r\n{ex}";
                 }
@@ -279,24 +248,13 @@ namespace UXM
             return null;
         }
 
-        private static async Task<long> WriteFileAsync(string path, MemoryStream ms)
+        private static async Task<long> WriteFileAsync(string path, byte[] bytes)
         {
-            using (FileStream fs = new FileStream(
-                path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
             {
-                ms.Position = 0;
-                while (ms.Position < ms.Length)
-                {
-                    int size = (int)Math.Min(1024 * 1024, ms.Length - ms.Position);
-                    byte[] bytes = new byte[size];
-                    ms.Read(bytes, 0, size);
-                    await fs.WriteAsync(bytes, 0, size);
-                }
+                await fs.WriteAsync(bytes, 0, bytes.Length);
             }
-
-            long length = ms.Length;
-            ms.Dispose();
-            return length;
+            return bytes.Length;
         }
     }
 }

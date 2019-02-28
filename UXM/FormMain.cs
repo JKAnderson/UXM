@@ -152,6 +152,11 @@ namespace UXM
 
         private async void btnRestore_Click(object sender, EventArgs e)
         {
+            DialogResult choice = MessageBox.Show("Restoring the game will delete any modified files you have installed.\n" +
+                "Do you want to proceed?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (choice == DialogResult.No)
+                return;
+
             EnableControls(false);
             cts = new CancellationTokenSource();
             string error = await Task.Run(() => GameRestorer.Restore(txtExePath.Text, progress, cts.Token));

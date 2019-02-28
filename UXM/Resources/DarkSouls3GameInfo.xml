@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <game_info>
   <required_gb>25</required_gb>
-  <bindertool_version>DarkSouls3</bindertool_version>
+  <bhd5_game>DarkSouls3</bhd5_game>
   <archives>
     <archive>Data1</archive>
     <archive>Data2</archive>
