@@ -1,4 +1,5 @@
-﻿using Semver;
+﻿using Microsoft.WindowsAPICodePack.Taskbar;
+using Semver;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -17,7 +18,7 @@ namespace UXM
 
         private bool closing;
         private CancellationTokenSource cts;
-        private Progress<(double value, string status)> progress;
+        private IProgress<(double value, string status)> progress;
 
         public FormMain()
         {
@@ -128,13 +129,11 @@ namespace UXM
 
             if (cts.Token.IsCancellationRequested)
             {
-                txtStatus.Text = "Patching aborted.";
-                pbrProgress.Value = 0;
+                progress.Report((0, "Patching aborted."));
             }
             else if (error != null)
             {
-                txtStatus.Text = "Patching failed.";
-                pbrProgress.Value = 0;
+                progress.Report((0, "Patching failed."));
                 ShowError(error);
             }
             else
@@ -163,13 +162,11 @@ namespace UXM
 
             if (cts.Token.IsCancellationRequested)
             {
-                txtStatus.Text = "Restoration aborted.";
-                pbrProgress.Value = 0;
+                progress.Report((0, "Restoration aborted."));
             }
             else if (error != null)
             {
-                txtStatus.Text = "Restoration failed.";
-                pbrProgress.Value = 0;
+                progress.Report((0, "Restoration failed."));
                 ShowError(error);
             }
             else
@@ -193,13 +190,11 @@ namespace UXM
 
             if (cts.Token.IsCancellationRequested)
             {
-                txtStatus.Text = "Unpacking aborted.";
-                pbrProgress.Value = 0;
+                progress.Report((0, "Unpacking aborted."));
             }
             else if (error != null)
             {
-                txtStatus.Text = "Unpacking failed.";
-                pbrProgress.Value = 0;
+                progress.Report((0, "Unpacking failed."));
                 ShowError(error);
             }
             else
@@ -235,8 +230,23 @@ namespace UXM
             if (report.value < 0 || report.value > 1)
                 throw new ArgumentOutOfRangeException("Progress value must be between 0 and 1, inclusive.");
 
-            pbrProgress.Value = (int)Math.Floor(report.value * pbrProgress.Maximum);
+            int percent = (int)Math.Floor(report.value * pbrProgress.Maximum);
+            pbrProgress.Value = percent;
             txtStatus.Text = report.status;
+            if (TaskbarManager.IsPlatformSupported)
+            {
+                TaskbarManager.Instance.SetProgressValue(percent, pbrProgress.Maximum);
+                if (percent == pbrProgress.Maximum && ActiveForm == this)
+                    TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+            }
+        }
+
+        private void FormMain_Activated(object sender, EventArgs e)
+        {
+            if (TaskbarManager.IsPlatformSupported && pbrProgress.Value == pbrProgress.Maximum)
+            {
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+            }
         }
     }
 }

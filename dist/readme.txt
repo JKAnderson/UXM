@@ -1,5 +1,5 @@
 
---| UXM 2.1.3
+--| UXM 2.2
 --| By TKGP
 --| https://www.nexusmods.com/darksouls3/mods/286
 --| https://github.com/JKAnderson/UXM
@@ -41,6 +41,12 @@ https://github.com/maxhauser/semver
 
 
 --| Changelog
+
+2.2
+	Identified the final file in DS3 (thanks Meow)
+	Identified files for Japanese DS2
+	Show progress on the taskbar icon
+	Make sure you really want to delete everything if you click Restore
 
 2.1.3
 	Support unpacking decrypted archives for BootBoost compatibility

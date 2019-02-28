@@ -230,6 +230,7 @@
             this.MinimumSize = new System.Drawing.Size(357, 234);
             this.Name = "FormMain";
             this.Text = "UXM <version>";
+            this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);

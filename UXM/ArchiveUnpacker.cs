@@ -13,7 +13,6 @@ namespace UXM
     static class ArchiveUnpacker
     {
         private const int WRITE_LIMIT = 1024 * 1024 * 100;
-        private static readonly Encoding ASCII = Encoding.ASCII;
 
         public static string Unpack(string exePath, IProgress<(double value, string status)> progress, CancellationToken ct)
         {
@@ -40,7 +39,7 @@ namespace UXM
                     keys = new Dictionary<string, string>();
                     foreach (string archive in gameInfo.Archives)
                     {
-                        string pemPath = gameDir + "\\" + archive.Replace("Ebl", "KeyCode") + ".pem";
+                        string pemPath = $@"{gameDir}\{archive.Replace("Ebl", "KeyCode")}.pem";
                         keys[archive] = File.ReadAllText(pemPath);
                     }
                 }
@@ -82,10 +81,10 @@ namespace UXM
                     progress.Report(((1.0 + (double)i / gameInfo.BackupDirs.Count) / (gameInfo.Archives.Count + 2.0),
                         $"Backing up directory \"{backup}\" ({i + 1}/{gameInfo.BackupDirs.Count})..."));
 
-                    string backupSource = gameDir + "\\" + backup;
-                    string backupTarget = gameDir + "\\_backup\\" + backup;
+                    string backupSource = $@"{gameDir}\{backup}";
+                    string backupTarget = $@"{gameDir}\_backup\{backup}";
 
-                    if (!Directory.Exists(backupTarget))
+                    if (Directory.Exists(backupSource) && !Directory.Exists(backupTarget))
                     {
                         foreach (string file in Directory.GetFiles(backupSource, "*", SearchOption.AllDirectories))
                         {
@@ -123,8 +122,8 @@ namespace UXM
             IProgress<(double value, string status)> progress, CancellationToken ct)
         {
             progress.Report(((index + 2.0) / (total + 2.0), $"Loading {archive}..."));
-            string bhdPath = gameDir + "\\" + archive + ".bhd";
-            string bdtPath = gameDir + "\\" + archive + ".bdt";
+            string bhdPath = $@"{gameDir}\{archive}.bhd";
+            string bdtPath = $@"{gameDir}\{archive}.bdt";
 
             if (File.Exists(bhdPath) && File.Exists(bdtPath))
             {
@@ -136,7 +135,7 @@ namespace UXM
                     {
                         byte[] magic = new byte[4];
                         fs.Read(magic, 0, 4);
-                        encrypted = ASCII.GetString(magic) != "BHD5";
+                        encrypted = Encoding.ASCII.GetString(magic) != "BHD5";
                     }
 
                     if (encrypted)
@@ -217,7 +216,7 @@ namespace UXM
                                 {
                                     bytes = header.ReadFile(bdtStream);
                                 }
-                                catch (EntryPointNotFoundException ex)
+                                catch (Exception ex)
                                 {
                                     return $"Failed to read file:\r\n{path}\r\n\r\n{ex}";
                                 }
@@ -228,7 +227,7 @@ namespace UXM
                                     writingSize += bytes.Length;
                                     asyncFileWriters.Add(WriteFileAsync(path, bytes));
                                 }
-                                catch (EntryPointNotFoundException ex)
+                                catch (Exception ex)
                                 {
                                     return $"Failed to write file:\r\n{path}\r\n\r\n{ex}";
                                 }
@@ -239,7 +238,7 @@ namespace UXM
                     foreach (Task<long> task in asyncFileWriters)
                         await task;
                 }
-                catch (EntryPointNotFoundException ex)
+                catch (Exception ex)
                 {
                     return $"Failed to unpack BDT:\r\n{bdtPath}\r\n\r\n{ex}";
                 }
