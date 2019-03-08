@@ -32,10 +32,10 @@
     <delete>timeact</delete>
   </delete_dirs>
   <replacements>
-    <replacement>gamedata:/=dlc_root:/</replacement>
-    <replacement>chrlq:/=title:/</replacement>
-    <replacement>maplq:/=title:/</replacement>
-    <replacement>objlq:/=title:/</replacement>
-    <replacement>partslq:/=title:/./</replacement>
+    <replacement>gamedata:/</replacement>
+    <replacement>chrlq:/</replacement>
+    <replacement>maplq:/</replacement>
+    <replacement>objlq:/</replacement>
+    <replacement>partslq:/</replacement>
   </replacements>
 </game_info>

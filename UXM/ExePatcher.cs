@@ -58,8 +58,8 @@ namespace UXM
                     if (ct.IsCancellationRequested)
                         return null;
 
-                    string target = gameInfo.Replacements[i].Target;
-                    string replacement = gameInfo.Replacements[i].Replacement;
+                    string target = gameInfo.Replacements[i];
+                    string replacement = "." + new string('/', target.Length - 1);
 
                     // Add 1.0 for preparation step
                     progress.Report(((i + 1.0) / (gameInfo.Replacements.Count + 1.0), $"Patching alias \"{target}\" ({i + 1}/{gameInfo.Replacements.Count})..."));

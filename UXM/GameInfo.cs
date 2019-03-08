@@ -14,7 +14,7 @@ namespace UXM
         public ArchiveDictionary Dictionary;
         public List<string> BackupDirs;
         public List<string> DeleteDirs;
-        public List<(string Target, string Replacement)> Replacements;
+        public List<string> Replacements;
 
         public GameInfo(string xmlStr, string dictionaryStr)
         {
@@ -26,9 +26,7 @@ namespace UXM
             Archives = xml.Root.Element("archives").Elements().Select(element => element.Value).ToList();
             BackupDirs = xml.Root.Element("backup_dirs").Elements().Select(element => element.Value).ToList();
             DeleteDirs = xml.Root.Element("delete_dirs").Elements().Select(element => element.Value).ToList();
-            Replacements = (from element in xml.Root.Element("replacements").Elements()
-                            let args = element.Value.Split('=')
-                            select (args[0], args[1])).ToList();
+            Replacements = xml.Root.Element("replacements").Elements().Select(element => element.Value).ToList();
         }
 
         public static GameInfo GetGameInfo(Util.Game game)

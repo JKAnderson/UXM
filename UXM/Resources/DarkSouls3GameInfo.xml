@@ -37,12 +37,12 @@
     <delete>testdata</delete>
   </delete_dirs>
   <replacements>
-    <replacement>data1:/=debug:/</replacement>
-    <replacement>data2:/=debug:/</replacement>
-    <replacement>data3:/=debug:/</replacement>
-    <replacement>data4:/=debug:/</replacement>
-    <replacement>data5:/=debug:/</replacement>
-    <replacement>game_dlc1:/=interroot:/</replacement>
-    <replacement>game_dlc2:/=interroot:/</replacement>
+    <replacement>data1:/</replacement>
+    <replacement>data2:/</replacement>
+    <replacement>data3:/</replacement>
+    <replacement>data4:/</replacement>
+    <replacement>data5:/</replacement>
+    <replacement>game_dlc1:/</replacement>
+    <replacement>game_dlc2:/</replacement>
   </replacements>
 </game_info>
