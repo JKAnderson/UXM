@@ -14,7 +14,11 @@ namespace UXM
             }
 
             string filename = Path.GetFileName(exePath);
-            if (filename == "DarkSoulsIII.exe")
+            if (filename == "sekiro.exe")
+            {
+                return Game.Sekiro;
+            }
+            else if (filename == "DarkSoulsIII.exe")
             {
                 return Game.DarkSouls3;
             }
@@ -55,6 +59,7 @@ namespace UXM
             DarkSouls2,
             Scholar,
             DarkSouls3,
+            Sekiro,
         }
     }
 }

@@ -37,6 +37,8 @@ namespace UXM
                 return new GameInfo(Properties.Resources.ScholarGameInfo, Properties.Resources.ScholarDictionary);
             else if (game == Util.Game.DarkSouls3)
                 return new GameInfo(Properties.Resources.DarkSouls3GameInfo, Properties.Resources.DarkSouls3Dictionary);
+            else if (game == Util.Game.Sekiro)
+                return new GameInfo(Properties.Resources.SekiroGameInfo, Properties.Resources.SekiroDictionary);
 
             throw new ArgumentException("Invalid game type.");
         }

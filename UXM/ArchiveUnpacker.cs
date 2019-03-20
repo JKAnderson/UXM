@@ -52,6 +52,10 @@ namespace UXM
             {
                 keys = ArchiveKeys.DarkSouls3Keys;
             }
+            else if (game == Util.Game.Sekiro)
+            {
+                keys = ArchiveKeys.SekiroKeys;
+            }
 
             string drive = Path.GetPathRoot(Path.GetFullPath(gameDir));
             DriveInfo driveInfo = new DriveInfo(drive);
@@ -153,7 +157,7 @@ namespace UXM
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (OverflowException ex)
                 {
                     return $"Failed to open BHD:\n{bhdPath}\n\n{ex}";
                 }
@@ -215,6 +219,12 @@ namespace UXM
                                 try
                                 {
                                     bytes = header.ReadFile(bdtStream);
+                                    if (path.Contains("_unknown") && bytes.Length > 0)
+                                    {
+                                        BinaryReaderEx br = new BinaryReaderEx(false, bytes);
+                                        if (br.ReadASCII(4) == "DCX\0")
+                                            path += ".dcx";
+                                    }
                                 }
                                 catch (Exception ex)
                                 {

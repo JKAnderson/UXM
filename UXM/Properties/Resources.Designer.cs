@@ -85,7 +85,25 @@ namespace UXM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;game_info&gt;
+        ///  &lt;required_gb&gt;16&lt;/required_gb&gt;
+        ///  &lt;bhd5_game&gt;DarkSouls2&lt;/bhd5_game&gt;
+        ///  &lt;archives&gt;
+        ///    &lt;archive&gt;GameDataEbl&lt;/archive&gt;
+        ///    &lt;archive&gt;HqChrEbl&lt;/archive&gt;
+        ///    &lt;archive&gt;HqMapEbl&lt;/archive&gt;
+        ///    &lt;archive&gt;HqObjEbl&lt;/archive&gt;
+        ///    &lt;archie&gt;HqPartsEbl&lt;/archie&gt;
+        ///  &lt;/archives&gt;
+        ///  &lt;backup_dirs&gt;
+        ///    &lt;backup&gt;param&lt;/backup&gt;
+        ///    &lt;backup&gt;sfx&lt;/backup&gt;
+        ///    &lt;backup&gt;sfx_hq&lt;/backup&gt;
+        ///    &lt;backup&gt;sound&lt;/backup&gt;
+        ///  &lt;/backup_dirs&gt;
+        ///  &lt;delete_dirs&gt;
+        ///    &lt;delete&gt;_unknown&lt;/delete&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DarkSouls2GameInfo {
             get {
@@ -122,7 +140,26 @@ namespace UXM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;game_info&gt;
+        ///  &lt;required_gb&gt;25&lt;/required_gb&gt;
+        ///  &lt;bhd5_game&gt;DarkSouls3&lt;/bhd5_game&gt;
+        ///  &lt;archives&gt;
+        ///    &lt;archive&gt;Data1&lt;/archive&gt;
+        ///    &lt;archive&gt;Data2&lt;/archive&gt;
+        ///    &lt;archive&gt;Data3&lt;/archive&gt;
+        ///    &lt;archive&gt;Data4&lt;/archive&gt;
+        ///    &lt;archive&gt;Data5&lt;/archive&gt;
+        ///    &lt;archive&gt;DLC1&lt;/archive&gt;
+        ///    &lt;archive&gt;DLC2&lt;/archive&gt;
+        ///  &lt;/archives&gt;
+        ///  &lt;backup_dirs&gt;
+        ///    &lt;backup&gt;sound&lt;/backup&gt;
+        ///  &lt;/backup_dirs&gt;
+        ///  &lt;delete_dirs&gt;
+        ///    &lt;delete&gt;_unknown&lt;/delete&gt;
+        ///    &lt;delete&gt;action&lt;/delete&gt;
+        ///    &lt;delete&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DarkSouls3GameInfo {
             get {
@@ -157,7 +194,8 @@ namespace UXM.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;game_info&gt;
-        ///  &lt;required_size&gt;18&lt;/required_size&gt;
+        ///  &lt;required_gb&gt;18&lt;/required_gb&gt;
+        ///  &lt;bhd5_game&gt;DarkSouls2&lt;/bhd5_game&gt;
         ///  &lt;archives&gt;
         ///    &lt;archive&gt;GameDataEbl&lt;/archive&gt;
         ///    &lt;archive&gt;LqChrEbl&lt;/archive&gt;
@@ -172,13 +210,67 @@ namespace UXM.Properties {
         ///    &lt;backup&gt;sound&lt;/backup&gt;
         ///  &lt;/backup_dirs&gt;
         ///  &lt;delete_dirs&gt;
-        ///    &lt;delete&gt;_unknown&lt;/delete&gt;
-        ///    &lt;delete&gt;breakobj&lt;/delete&gt;
-        /// [rest of string was truncated]&quot;;.
+        ///    &lt;delete&gt;_unknown&lt;/delete&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ScholarGameInfo {
             get {
                 return ResourceManager.GetString("ScholarGameInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /action/eventnameid.txt
+        ////action/script/c0000.hks
+        ////action/script/c0001.hks
+        ////action/script/c0002.hks
+        ////action/script/c0004.hks
+        ////action/script/c0006.hks
+        ////action/script/c0100.hks
+        ////action/script/c1030.hks
+        ////action/script/c1040.hks
+        ////action/script/c1041.hks
+        ////action/script/c1050.hks
+        ////action/script/c1060.hks
+        ////action/script/c1070.hks
+        ////action/script/c1090.hks
+        ////action/script/c1100.hks
+        ////action/script/c1105.hks
+        ////action/script/c1110.hks
+        ////action/script/c1120.hks
+        ////action/script/c1130.hks
+        ////action/script/c113 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SekiroDictionary {
+            get {
+                return ResourceManager.GetString("SekiroDictionary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;game_info&gt;
+        ///  &lt;required_gb&gt;25&lt;/required_gb&gt;
+        ///  &lt;bhd5_game&gt;Sekiro&lt;/bhd5_game&gt;
+        ///  &lt;archives&gt;
+        ///    &lt;archive&gt;Data1&lt;/archive&gt;
+        ///    &lt;archive&gt;Data2&lt;/archive&gt;
+        ///    &lt;archive&gt;Data3&lt;/archive&gt;
+        ///    &lt;archive&gt;Data4&lt;/archive&gt;
+        ///    &lt;archive&gt;Data5&lt;/archive&gt;
+        ///  &lt;/archives&gt;
+        ///  &lt;backup_dirs&gt;
+        ///    &lt;backup&gt;sound&lt;/backup&gt;
+        ///  &lt;/backup_dirs&gt;
+        ///  &lt;delete_dirs&gt;
+        ///    &lt;delete&gt;_unknown&lt;/delete&gt;
+        ///    &lt;delete&gt;action&lt;/delete&gt;
+        ///    &lt;delete&gt;adhoc&lt;/delete&gt;
+        ///    &lt;delete&gt;chr&lt;/delete&gt;
+        ///    &lt;delete&gt;event&lt;/d [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SekiroGameInfo {
+            get {
+                return ResourceManager.GetString("SekiroGameInfo", resourceCulture);
             }
         }
     }

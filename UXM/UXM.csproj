@@ -131,6 +131,8 @@
     <Content Include="FodyWeavers.xml" />
     <Content Include="icon.ico" />
     <Content Include="Resources\DarkSouls2GameInfo.xml" />
+    <None Include="Resources\SekiroDictionary.txt" />
+    <Content Include="Resources\SekiroGameInfo.xml" />
     <Content Include="Resources\ScholarGameInfo.xml" />
     <Content Include="Resources\DarkSouls3GameInfo.xml" />
   </ItemGroup>
