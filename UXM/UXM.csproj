@@ -119,22 +119,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DarkSouls2Dictionary.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ScholarDictionary.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\DarkSouls3Dictionary.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="dist\readme.txt" />
+    <Content Include="dist\res\DarkSouls2Dictionary.txt" />
+    <Content Include="dist\res\DarkSouls2GameInfo.xml" />
+    <Content Include="dist\res\DarkSouls3Dictionary.txt" />
+    <Content Include="dist\res\DarkSouls3GameInfo.xml" />
+    <Content Include="dist\res\ScholarDictionary.txt" />
+    <Content Include="dist\res\ScholarGameInfo.xml" />
+    <Content Include="dist\res\SekiroDictionary.txt" />
+    <Content Include="dist\res\SekiroGameInfo.xml" />
     <Content Include="FodyWeavers.xml" />
     <Content Include="icon.ico" />
-    <Content Include="Resources\DarkSouls2GameInfo.xml" />
-    <None Include="Resources\SekiroDictionary.txt" />
-    <Content Include="Resources\SekiroGameInfo.xml" />
-    <Content Include="Resources\ScholarGameInfo.xml" />
-    <Content Include="Resources\DarkSouls3GameInfo.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SoulsFormats\SoulsFormats\SoulsFormats.csproj">

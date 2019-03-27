@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("UXM")]
-[assembly: AssemblyDescription("Enables file modding for Dark Souls 2, Scholar of the First Sin, and Dark Souls 3.")]
+[assembly: AssemblyDescription("Enables file modding for Dark Souls 2, Scholar of the First Sin, Dark Souls 3, and Sekiro.")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
@@ -36,5 +36,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.2.0.0")]
-[assembly: AssemblyFileVersion("2.2")]
+[assembly: AssemblyVersion("2.92.0.0")]
+[assembly: AssemblyFileVersion("2.92")]

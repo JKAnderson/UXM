@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <game_info>
-  <required_gb>25</required_gb>
+  <required_gb>12</required_gb>
   <bhd5_game>Sekiro</bhd5_game>
   <archives>
     <archive>Data1</archive>
@@ -15,8 +15,8 @@
   <delete_dirs>
     <delete>_unknown</delete>
     <delete>action</delete>
-    <delete>adhoc</delete>
     <delete>chr</delete>
+	<delete>cutscene</delete>
     <delete>event</delete>
     <delete>facegen</delete>
     <delete>font</delete>
@@ -28,11 +28,9 @@
     <delete>other</delete>
     <delete>param</delete>
     <delete>parts</delete>
-    <delete>remo</delete>
     <delete>script</delete>
     <delete>sfx</delete>
     <delete>shader</delete>
-    <delete>testdata</delete>
   </delete_dirs>
   <replacements>
     <replacement>data1:/</replacement>

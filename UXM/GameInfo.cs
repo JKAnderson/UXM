@@ -1,6 +1,7 @@
 ﻿using SoulsFormats;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -31,16 +32,21 @@ namespace UXM
 
         public static GameInfo GetGameInfo(Util.Game game)
         {
+            string prefix;
             if (game == Util.Game.DarkSouls2)
-                return new GameInfo(Properties.Resources.DarkSouls2GameInfo, Properties.Resources.DarkSouls2Dictionary);
+                prefix = "DarkSouls2";
             else if (game == Util.Game.Scholar)
-                return new GameInfo(Properties.Resources.ScholarGameInfo, Properties.Resources.ScholarDictionary);
+                prefix = "Scholar";
             else if (game == Util.Game.DarkSouls3)
-                return new GameInfo(Properties.Resources.DarkSouls3GameInfo, Properties.Resources.DarkSouls3Dictionary);
+                prefix = "DarkSouls3";
             else if (game == Util.Game.Sekiro)
-                return new GameInfo(Properties.Resources.SekiroGameInfo, Properties.Resources.SekiroDictionary);
+                prefix = "Sekiro";
+            else
+                throw new ArgumentException("Invalid game type.");
 
-            throw new ArgumentException("Invalid game type.");
+            string gameInfo = File.ReadAllText($@"res\{prefix}GameInfo.xml");
+            string dictionary = File.ReadAllText($@"res\{prefix}Dictionary.txt");
+            return new GameInfo(gameInfo, dictionary);
         }
     }
 }
