@@ -1,13 +1,13 @@
 # UXM
-Enables file modding for DS2, SotFS, and DS3 by unpacking game archives and patching the executable to load loose files instead.  
+Enables file modding for DS2, SotFS, DS3, and Sekiro by unpacking game archives and patching the executable to load loose files instead.  
 Requires [.NET 4.7.2](https://www.microsoft.com/net/download/thank-you/net472) - Windows 10 users should already have this.  
 
 # Usage
-When first starting the app, the default Steam location of DS3 will be selected. If the game you want is installed somewhere else, use the Browse button to correct it.
+When first starting the app, the default Steam location of Sekiro will be selected. If the game you want is installed somewhere else, use the Browse button to correct it.
 
 The Unpack button will extract all files from the game archives; any files that are already present will be skipped, so if you need to unmodify any file you can simply delete it and unpack again without having to sit through the entire process.
 
-The Patch button will modify the executable to use those extracted files instead of looking in the archives. Patching the executable without also unpacking the archives will crash the game, so make sure you do both.
+The Patch button will modify the executable to use those extracted files instead of looking in the archives; please note that for Sekiro, most users should use Mod Engine instead of patching. Patching the executable without also unpacking the archives will crash the game, so make sure you do both.
 
 Finally, the Restore button will restore the original executable and delete the extracted files, and the Abort button will cancel any operation in progress.
 
@@ -24,6 +24,9 @@ UXM only edits data within the executable, not code, so anticheat should have no
 [Semver](https://github.com/maxhauser/semver) by Max Hauser
 
 # Changelog
+### 2.3
+* Sekiro support
+
 ### 2.2
 * Identified the final file in DS3 (thanks Meow)
 * Identified files for Japanese DS2

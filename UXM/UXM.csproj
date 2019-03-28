@@ -155,7 +155,7 @@
 if "$(ConfigurationName)" == "Release" (
   md "%25output%25"
   del "%25output%25"
-  xcopy "$(SolutionDir)dist\*.*" "%25output%25" /Y /I /E
+  xcopy "$(ProjectDir)dist\*.*" "%25output%25" /Y /I /E
   copy "$(TargetPath)" "%25output%25\"
   copy "$(TargetPath).config" "%25output%25\"
   copy "$(TargetDir)$(TargetName).pdb" "%25output%25\"

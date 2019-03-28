@@ -15,7 +15,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ExePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game\DarkSoulsIII.exe</Value>
+      <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\Sekiro\sekiro.exe</Value>
     </Setting>
   </Settings>
 </SettingsFile>
