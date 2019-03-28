@@ -1,7 +1,7 @@
 
 --| UXM 2.3
 --| By TKGP
---| https://www.nexusmods.com/darksouls3/mods/286
+--| https://www.nexusmods.com/sekiro/mods/26
 --| https://github.com/JKAnderson/UXM
 
 Enables file modding for DS2, SotFS, DS3, and Sekiro by unpacking game archives and patching the executable to load loose files instead.

@@ -13,7 +13,7 @@ namespace UXM
 {
     public partial class FormMain : Form
     {
-        private const string UPDATE_LINK = "https://www.nexusmods.com/darksouls3/mods/286?tab=files";
+        private const string UPDATE_LINK = "https://www.nexusmods.com/sekiro/mods/26?tab=files";
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private bool closing;
