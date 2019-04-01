@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<game_info>
+  <required_gb>1</required_gb>
+  <bhd5_game>Sekiro</bhd5_game>
+  <archives>
+    <archive>Data</archive>
+  </archives>
+  <backup_dirs>
+    <backup>sound</backup>
+  </backup_dirs>
+  <delete_dirs>
+    <delete>_unknown</delete>
+    <delete>asset</delete>
+    <delete>export</delete>
+    <delete>font</delete>
+    <delete>menu</delete>
+    <delete>msg</delete>
+    <delete>param</delete>
+    <delete>shader</delete>
+  </delete_dirs>
+  <replacements>
+    <replacement>data:/</replacement>
+  </replacements>
+</game_info>

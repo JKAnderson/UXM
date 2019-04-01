@@ -126,7 +126,9 @@
     <Content Include="dist\res\DarkSouls3GameInfo.xml" />
     <Content Include="dist\res\ScholarDictionary.txt" />
     <Content Include="dist\res\ScholarGameInfo.xml" />
+    <Content Include="dist\res\SekiroBonusDictionary.txt" />
     <Content Include="dist\res\SekiroDictionary.txt" />
+    <Content Include="dist\res\SekiroBonusGameInfo.xml" />
     <Content Include="dist\res\SekiroGameInfo.xml" />
     <Content Include="FodyWeavers.xml" />
     <Content Include="icon.ico" />

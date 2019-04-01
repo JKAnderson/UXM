@@ -41,11 +41,18 @@ namespace UXM
                 prefix = "DarkSouls3";
             else if (game == Util.Game.Sekiro)
                 prefix = "Sekiro";
+            else if (game == Util.Game.SekiroBonus)
+                prefix = "SekiroBonus";
             else
                 throw new ArgumentException("Invalid game type.");
-
+            
+#if DEBUG
+            string gameInfo = File.ReadAllText($@"..\..\dist\res\{prefix}GameInfo.xml");
+            string dictionary = File.ReadAllText($@"..\..\dist\res\{prefix}Dictionary.txt");
+#else
             string gameInfo = File.ReadAllText($@"res\{prefix}GameInfo.xml");
             string dictionary = File.ReadAllText($@"res\{prefix}Dictionary.txt");
+#endif
             return new GameInfo(gameInfo, dictionary);
         }
     }

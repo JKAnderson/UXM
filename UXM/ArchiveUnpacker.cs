@@ -56,6 +56,10 @@ namespace UXM
             {
                 keys = ArchiveKeys.SekiroKeys;
             }
+            else if (game == Util.Game.SekiroBonus)
+            {
+                keys = ArchiveKeys.SekiroBonusKeys;
+            }
 
             string drive = Path.GetPathRoot(Path.GetFullPath(gameDir));
             DriveInfo driveInfo = new DriveInfo(drive);

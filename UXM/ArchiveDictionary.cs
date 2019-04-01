@@ -6,7 +6,7 @@ namespace UXM
 {
     class ArchiveDictionary
     {
-        private const uint prime = 37;
+        private const uint PRIME = 37;
 
         private Dictionary<uint, string> hashes;
 
@@ -18,18 +18,18 @@ namespace UXM
                 string trimmed = line.Trim();
                 if (trimmed.Length > 0)
                 {
-                    uint hash = computeHash(trimmed);
+                    uint hash = ComputeHash(trimmed);
                     hashes[hash] = trimmed;
                 }
             }
         }
 
-        private static uint computeHash(string path)
+        private static uint ComputeHash(string path)
         {
             string hashable = path.Trim().Replace('\\', '/').ToLowerInvariant();
             if (!hashable.StartsWith("/"))
                 hashable = '/' + hashable;
-            return hashable.Aggregate(0u, (i, c) => i * prime + c);
+            return hashable.Aggregate(0u, (i, c) => i * PRIME + c);
         }
 
         public bool GetPath(uint hash, out string path)

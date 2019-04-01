@@ -129,5 +129,18 @@ QRDWHbRYhIfWSP9urtagjcsmcuG+p34fp+KyWOwkil3FJqwH1KgSTbk9Tb0oBPzq
 TCJKeE/wgu6hY++lBi5T3ArHZZcsbXzV6wIFAPlRTMc=
 -----END RSA PUBLIC KEY-----",
         };
+
+        public static Dictionary<string, string> SekiroBonusKeys = new Dictionary<string, string>
+        {
+            ["Data"] =
+@"-----BEGIN RSA PUBLIC KEY-----
+MIIBDAKCAQEAxFOPK7c3E2Tu8HSS3NUlWUHdlJZIJiHf/0DhyLZUP68iEhJ8SLQ0
+sDAgFBxIAEZQcVZBKLhTZiTyqaqIolgCDH6ZcMlWOGOWj3G6PuhPeb/7ZeQSo7Xv
+plGCovqnioRoaFf4gVZDsbpVXIGNXwWsL5kArQiQo3ZrMs17/t77yZ6avC/1hnFp
+ks1k3uQ269NKZOpU6Q73I8yolUFGJFBlm9uHqRfZC0wcA+IXjo96C1PoTKJQktkh
+J07MPeoeckkAGdUv9S+kcDN04SAGMJJBWB9OOvn2Qle938gmCY6beeuk8c/l67zs
+ChgwGmsLdVr7W6hZL3aNvsf/BWFQ+e7+tQIFANZbM50=
+-----END RSA PUBLIC KEY-----",
+        };
     }
 }

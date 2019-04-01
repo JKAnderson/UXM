@@ -14,15 +14,7 @@ namespace UXM
             }
 
             string filename = Path.GetFileName(exePath);
-            if (filename == "sekiro.exe")
-            {
-                return Game.Sekiro;
-            }
-            else if (filename == "DarkSoulsIII.exe")
-            {
-                return Game.DarkSouls3;
-            }
-            else if (filename == "DarkSoulsII.exe")
+            if (filename == "DarkSoulsII.exe")
             {
                 using (FileStream fs = File.OpenRead(exePath))
                 using (BinaryReader br = new BinaryReader(fs))
@@ -47,10 +39,22 @@ namespace UXM
                     }
                 }
             }
+            else if (filename == "DarkSoulsIII.exe")
+            {
+                return Game.DarkSouls3;
+            }
+            else if (filename == "sekiro.exe")
+            {
+                return Game.Sekiro;
+            }
+            else if (filename == "DigitalArtwork_MiniSoundtrack.exe")
+            {
+                return Game.SekiroBonus;
+            }
             else
             {
                 throw new ArgumentException($"Invalid executable name given: {filename}\r\n"
-                    + "Executable file name is expected to be either DarkSoulsII.exe or DarkSoulsIII.exe.");
+                    + "Executable file name is expected to be DarkSoulsII.exe, DarkSoulsIII.exe, sekiro.exe, or DigitalArtwork_MiniSoundtrack.exe.");
             }
         }
 
@@ -60,6 +64,7 @@ namespace UXM
             Scholar,
             DarkSouls3,
             Sekiro,
+            SekiroBonus,
         }
     }
 }
