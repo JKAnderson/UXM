@@ -1,5 +1,5 @@
 
---| UXM 2.3
+--| UXM 2.4
 --| By TKGP
 --| https://www.nexusmods.com/sekiro/mods/26
 --| https://github.com/JKAnderson/UXM
@@ -41,6 +41,10 @@ https://github.com/maxhauser/semver
 
 
 --| Changelog
+
+2.4
+	Sekiro pre-order artbook/soundtrack thing support; just browse to DigitalArtwork_MiniSoundtrack.exe
+	Identify more files for Sekiro (thank you horkrux!)
 
 2.3
 	Sekiro support

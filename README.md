@@ -25,6 +25,10 @@ UXM only edits data within the executable, not code, so anticheat should have no
 [Semver](https://github.com/maxhauser/semver) by Max Hauser
 
 # Changelog
+### 2.4
+* Sekiro pre-order artbook/soundtrack thing support; just browse to DigitalArtwork_MiniSoundtrack.exe
+* Identify more files for Sekiro (thank you horkrux!)
+
 ### 2.3
 * Sekiro support
 
