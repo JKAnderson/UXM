@@ -143,7 +143,7 @@ ChgwGmsLdVr7W6hZL3aNvsf/BWFQ+e7+tQIFANZbM50=
 -----END RSA PUBLIC KEY-----",
         };
         
-                public static Dictionary<string, string> EldenRingKeys = new Dictionary<string, string>
+        public static Dictionary<string, string> EldenRingKeys = new Dictionary<string, string>
         {
             ["Data0"] =
 @"-----BEGIN RSA PUBLIC KEY-----
