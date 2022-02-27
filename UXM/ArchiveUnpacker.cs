@@ -60,6 +60,10 @@ namespace UXM
             {
                 keys = ArchiveKeys.SekiroBonusKeys;
             }
+            else if (game == Util.Game.EldenRing)
+            {
+                keys = ArchiveKeys.EldenRingKeys;
+            }
 
             string drive = Path.GetPathRoot(Path.GetFullPath(gameDir));
             DriveInfo driveInfo = new DriveInfo(drive);
