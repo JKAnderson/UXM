@@ -51,6 +51,10 @@ namespace UXM
             {
                 return Game.SekiroBonus;
             }
+            else if (filename == "eldenring.exe")
+            {
+                return Game.EldenRing;
+            }
             else
             {
                 throw new ArgumentException($"Invalid executable name given: {filename}\r\n"
@@ -65,6 +69,7 @@ namespace UXM
             DarkSouls3,
             Sekiro,
             SekiroBonus,
+            EldenRing
         }
     }
 }
