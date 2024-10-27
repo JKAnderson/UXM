@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <game_info>
   <required_gb>12</required_gb>
-  <bhd5_game>Sekiro</bhd5_game>
+  <bhd5_game>DarkSouls3</bhd5_game>
   <archives>
     <archive>Data1</archive>
     <archive>Data2</archive>

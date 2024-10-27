@@ -1,10 +1,8 @@
 ﻿using Microsoft.WindowsAPICodePack.Taskbar;
-using Semver;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +11,6 @@ namespace UXM
 {
     public partial class FormMain : Form
     {
-        private const string UPDATE_LINK = "https://www.nexusmods.com/sekiro/mods/26?tab=files";
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private bool closing;
@@ -29,7 +26,7 @@ namespace UXM
             progress = new Progress<(double value, string status)>(ReportProgress);
         }
 
-        private async void FormMain_Load(object sender, EventArgs e)
+        private void FormMain_Load(object sender, EventArgs e)
         {
             Text = "UXM " + Application.ProductVersion;
             EnableControls(true);
@@ -41,33 +38,6 @@ namespace UXM
                 WindowState = FormWindowState.Maximized;
 
             txtExePath.Text = settings.ExePath;
-
-            Octokit.GitHubClient gitHubClient = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("UXM"));
-            try
-            {
-                Octokit.Release release = await gitHubClient.Repository.Release.GetLatest("JKAnderson", "UXM");
-                if (SemVersion.Parse(release.TagName) > Application.ProductVersion)
-                {
-                    lblUpdate.Visible = false;
-                    LinkLabel.Link link = new LinkLabel.Link();
-                    link.LinkData = UPDATE_LINK;
-                    llbUpdate.Links.Add(link);
-                    llbUpdate.Visible = true;
-                }
-                else
-                {
-                    lblUpdate.Text = "App up to date";
-                }
-            }
-            catch (Exception ex) when (ex is HttpRequestException || ex is Octokit.ApiException || ex is ArgumentException)
-            {
-                lblUpdate.Text = "Update status unknown";
-            }
-        }
-
-        private void llbUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(e.Link.LinkData.ToString());
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -116,7 +86,7 @@ namespace UXM
         {
             string dir = Path.GetDirectoryName(txtExePath.Text);
             if (Directory.Exists(dir))
-                Process.Start(dir);
+                Process.Start(new ProcessStartInfo(dir) { UseShellExecute = true });
             else
                 SystemSounds.Hand.Play();
         }

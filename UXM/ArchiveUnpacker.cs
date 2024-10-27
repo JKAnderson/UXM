@@ -28,7 +28,7 @@ namespace UXM
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return $"{ex}";
             }
 
             Dictionary<string, string> keys = null;
@@ -190,7 +190,7 @@ namespace UXM
 
                                 string path;
                                 bool unknown;
-                                if (archiveDictionary.GetPath(header.FileNameHash, out path))
+                                if (archiveDictionary.GetPath((uint)header.FileNameHash, out path))
                                 {
                                     unknown = false;
                                     path = gameDir + path.Replace('/', '\\');
