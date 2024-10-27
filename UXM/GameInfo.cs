@@ -19,8 +19,6 @@ namespace UXM
 
         public GameInfo(string xmlStr, string dictionaryStr)
         {
-            Dictionary = new ArchiveDictionary(dictionaryStr);
-
             XDocument xml = XDocument.Parse(xmlStr);
             RequiredGB = long.Parse(xml.Root.Element("required_gb").Value);
             BHD5Game = (BHD5.Game)Enum.Parse(typeof(BHD5.Game), xml.Root.Element("bhd5_game").Value);
@@ -28,23 +26,22 @@ namespace UXM
             BackupDirs = xml.Root.Element("backup_dirs").Elements().Select(element => element.Value).ToList();
             DeleteDirs = xml.Root.Element("delete_dirs").Elements().Select(element => element.Value).ToList();
             Replacements = xml.Root.Element("replacements").Elements().Select(element => element.Value).ToList();
+
+            Dictionary = new ArchiveDictionary(dictionaryStr, BHD5Game);
         }
 
         public static GameInfo GetGameInfo(Util.Game game)
         {
-            string prefix;
-            if (game == Util.Game.DarkSouls2)
-                prefix = "DarkSouls2";
-            else if (game == Util.Game.Scholar)
-                prefix = "Scholar";
-            else if (game == Util.Game.DarkSouls3)
-                prefix = "DarkSouls3";
-            else if (game == Util.Game.Sekiro)
-                prefix = "Sekiro";
-            else if (game == Util.Game.SekiroBonus)
-                prefix = "SekiroBonus";
-            else
-                throw new ArgumentException("Invalid game type.");
+            string prefix = game switch
+            {
+                Util.Game.DarkSouls2 => "DarkSouls2",
+                Util.Game.Scholar => "Scholar",
+                Util.Game.DarkSouls3 => "DarkSouls3",
+                Util.Game.Sekiro => "Sekiro",
+                Util.Game.SekiroBonus => "SekiroBonus",
+                Util.Game.EldenRing => "EldenRing",
+                _ => throw new ArgumentException("Invalid game type."),
+            };
 
 #if DEBUG
             string gameInfo = File.ReadAllText($@"..\..\..\dist\res\{prefix}GameInfo.xml");

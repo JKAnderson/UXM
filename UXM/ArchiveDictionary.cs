@@ -1,40 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using SoulsFormats;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace UXM
 {
-    class ArchiveDictionary
+    internal class ArchiveDictionary : Dictionary<ulong, string>
     {
-        private const uint PRIME = 37;
+        private const uint PRIME32 = 37;
+        private const ulong PRIME64 = 133;
 
-        private Dictionary<uint, string> hashes;
-
-        public ArchiveDictionary(string dictionary)
+        public ArchiveDictionary(string dictionary, BHD5.Game game)
         {
-            hashes = new Dictionary<uint, string>();
             foreach (string line in Regex.Split(dictionary, "[\r\n]+"))
             {
-                string trimmed = line.Trim();
-                if (trimmed.Length > 0)
+                if (!string.IsNullOrWhiteSpace(line))
                 {
-                    uint hash = ComputeHash(trimmed);
-                    hashes[hash] = trimmed;
+                    string path = Normalize(line);
+                    ulong hash = FromHash(path, game);
+                    this[hash] = path;
                 }
             }
         }
 
-        private static uint ComputeHash(string path)
+        public static string Normalize(string path)
         {
-            string hashable = path.Trim().Replace('\\', '/').ToLowerInvariant();
-            if (!hashable.StartsWith("/"))
-                hashable = '/' + hashable;
-            return hashable.Aggregate(0u, (i, c) => i * PRIME + c);
+            if (path.Contains(':'))
+                path = path[(path.IndexOf(':') + 1)..];
+
+            path = path.ToLowerInvariant().Replace('\\', '/').Trim();
+
+            if (!path.StartsWith('/'))
+                path = '/' + path;
+
+            return path;
         }
 
-        public bool GetPath(uint hash, out string path)
+        public static ulong FromHash(string path, BHD5.Game game)
         {
-            return hashes.TryGetValue(hash, out path);
+            if (game == BHD5.Game.EldenRing)
+                return path.Aggregate(0ul, (a, c) => a * PRIME64 + c);
+            else
+                return path.Aggregate(0u, (a, c) => a * PRIME32 + c);
         }
     }
 }

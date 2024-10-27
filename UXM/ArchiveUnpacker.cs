@@ -28,37 +28,37 @@ namespace UXM
             }
             catch (Exception ex)
             {
-                return $"{ex}";
+                return $"Failed to get game info.\r\n\r\n{ex}";
             }
 
-            Dictionary<string, string> keys = null;
-            if (game == Util.Game.DarkSouls2 || game == Util.Game.Scholar)
+            Dictionary<string, string> keys;
+            try
             {
-                try
+                Dictionary<string, string> loadDs2Keys()
                 {
-                    keys = new Dictionary<string, string>();
+                    var keys = new Dictionary<string, string>();
                     foreach (string archive in gameInfo.Archives)
                     {
                         string pemPath = $@"{gameDir}\{archive.Replace("Ebl", "KeyCode")}.pem";
                         keys[archive] = File.ReadAllText(pemPath);
                     }
+                    return keys;
                 }
-                catch (Exception ex)
+
+                keys = game switch
                 {
-                    return $"Failed to load Dark Souls 2 archive keys.\r\n\r\n{ex}";
-                }
+                    Util.Game.DarkSouls2 => loadDs2Keys(),
+                    Util.Game.Scholar => loadDs2Keys(),
+                    Util.Game.DarkSouls3 => ArchiveKeys.DarkSouls3Keys,
+                    Util.Game.Sekiro => ArchiveKeys.SekiroKeys,
+                    Util.Game.SekiroBonus => ArchiveKeys.SekiroBonusKeys,
+                    Util.Game.EldenRing => ArchiveKeys.EldenRingKeys,
+                    _ => throw new NotImplementedException(),
+                };
             }
-            else if (game == Util.Game.DarkSouls3)
+            catch (Exception ex)
             {
-                keys = ArchiveKeys.DarkSouls3Keys;
-            }
-            else if (game == Util.Game.Sekiro)
-            {
-                keys = ArchiveKeys.SekiroKeys;
-            }
-            else if (game == Util.Game.SekiroBonus)
-            {
-                keys = ArchiveKeys.SekiroBonusKeys;
+                return $"Failed to load archive keys.\r\n\r\n{ex}";
             }
 
             string drive = Path.GetPathRoot(Path.GetFullPath(gameDir));
@@ -132,6 +132,7 @@ namespace UXM
             progress.Report(((index + 2.0) / (total + 2.0), $"Loading {archive}..."));
             string bhdPath = $@"{gameDir}\{archive}.bhd";
             string bdtPath = $@"{gameDir}\{archive}.bdt";
+            string outDir = Path.GetDirectoryName(bhdPath);
 
             if (File.Exists(bhdPath) && File.Exists(bdtPath))
             {
@@ -148,17 +149,13 @@ namespace UXM
 
                     if (encrypted)
                     {
-                        using (MemoryStream bhdStream = CryptographyUtility.DecryptRsa(bhdPath, key))
-                        {
-                            bhd = BHD5.Read(bhdStream, gameVersion);
-                        }
+                        using MemoryStream bhdStream = CryptographyUtility.DecryptRsa(bhdPath, key);
+                        bhd = BHD5.Read(bhdStream, gameVersion);
                     }
                     else
                     {
-                        using (FileStream bhdStream = File.OpenRead(bhdPath))
-                        {
-                            bhd = BHD5.Read(bhdStream, gameVersion);
-                        }
+                        using FileStream bhdStream = File.OpenRead(bhdPath);
+                        bhd = BHD5.Read(bhdStream, gameVersion);
                     }
                 }
                 catch (OverflowException ex)
@@ -190,18 +187,18 @@ namespace UXM
 
                                 string path;
                                 bool unknown;
-                                if (archiveDictionary.GetPath((uint)header.FileNameHash, out path))
+                                if (archiveDictionary.TryGetValue(header.FileNameHash, out path))
                                 {
                                     unknown = false;
-                                    path = gameDir + path.Replace('/', '\\');
+                                    path = $@"{outDir}\{path.Replace('/', '\\')}";
                                     if (File.Exists(path))
                                         continue;
                                 }
                                 else
                                 {
                                     unknown = true;
-                                    string filename = $"{archive}_{header.FileNameHash:D10}";
-                                    string directory = $@"{gameDir}\_unknown";
+                                    string filename = $"{archive}_{header.FileNameHash:x16}";
+                                    string directory = $@"{outDir}\_unknown";
                                     path = $@"{directory}\{filename}";
                                     if (File.Exists(path) || Directory.Exists(directory) && Directory.GetFiles(directory, $"{filename}.*").Length > 0)
                                         continue;
@@ -231,7 +228,7 @@ namespace UXM
                                     bytes = header.ReadFile(bdtStream);
                                     if (unknown)
                                     {
-                                        BinaryReaderEx br = new BinaryReaderEx(false, bytes);
+                                        var br = new BinaryReaderEx(false, bytes);
                                         if (bytes.Length >= 3 && br.GetASCII(0, 3) == "GFX")
                                             path += ".gfx";
                                         else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "FSB5")
@@ -292,7 +289,7 @@ namespace UXM
         {
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
             {
-                await fs.WriteAsync(bytes, 0, bytes.Length);
+                await fs.WriteAsync(bytes);
             }
             return bytes.Length;
         }
