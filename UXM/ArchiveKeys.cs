@@ -215,5 +215,58 @@ NdHJGH2iEONUN6DMK9t0v2JBnwCOZQ7W+Gt7SpNNrkx8xKEM8gH9na10g9ne11Mi
 O1FnLm8i4zOxVdPHQBKICkKcGS1o3C2dfwIEXw/f3w==
 -----END RSA PUBLIC KEY-----",
         };
+
+        public static Dictionary<string, string> ArmoredCore6Keys = new Dictionary<string, string>
+        {
+            ["Data0"] =
+@"-----BEGIN RSA PUBLIC KEY-----
+MIIBDAKCAQEA7F43Ss9kroawBSUW6GBhSUo6GtxYtUV8zCPkcHhSJLGPASHhwsaX
+zMRrd+Ul9qB3oYchb4xYtdMWKFe0/ZDi9vgYXvF3rlWaZKAu1k/F6RwVAd//I3Kj
+JsYlhayskInKqB3BvB/KL2Ga8QBsZ/G9cLlUYsqIj3as9oqbfEXVmGVeuhg0I+NQ
+NL+2sThqp5eOQstfXQgqduOt0ixd/r9e5VjLhyj2z4hCEF2TVsDw9wGEBem1TkcO
+C/E8obl9fTHwEK7l2i8a4HafY7flU220r8y4UwQ+9Aq94xUYT2xdcTjdyBIaZtyS
+YmR86B680OyL9oiEonEFhh4cor/84PSmNQIFAOHX27k=
+-----END RSA PUBLIC KEY-----",
+
+            ["Data1"] =
+@"-----BEGIN RSA PUBLIC KEY-----
+MIIBCwKCAQEAsM5QTi6Fo1li23fkvP7jXqFlanR61VS1znElmsZH0Ez4LtuM7WUC
+QnZyi9u15T89WmIKCGpfgHZBgJEVFqW9FMhBxrA5/gXcqnGESjc+NNF71rfug/qg
+Ue7B9tXlq18/bdD7qPEjYY02H5fh4Z/g0+oClSNyZR46G/MXZSw8KMV4QHikCAxJ
+N40Nxd+MpQcpc3J5SXfsXxi9gNSxHO1+KzGwRrEh1/9d7bPyd4jBuTR+SEd+ZDHR
+3jTbbRNUypB/x780KXuJnGrC8UfB6ttxfBmLs7nmhteO6R1rr5zWuHJBry7Of9t4
+JEQRDwb2VT3fpQ2oHgOc5zDYMOdObdX/tQIEZYdnGQ==
+-----END RSA PUBLIC KEY-----",
+
+            ["Data2"] =
+@"-----BEGIN RSA PUBLIC KEY-----
+MIIBDAKCAQEApvNV8cCaxTBtW6kB94Gd5/+NuQnVLxRo6b0QUSSXh8KGWCRNPjpq
+LEyu0kuHCTG5xfomzB5vlq9INu0odZAWZu+NWvz+YydnIQO+UPDF9J/wE92SMzBj
+n7d4uEglevPswQLiJVQThCtrl1B8dCz7vFvlSknx23jdUQ/0hfxVnLvP2GpNW/v5
+iDK+J2RJFxpd8td9FpHMF+OMxT3pvQyOBleWgEcmiaA1O6AxZA3YGWaL7qnKgx4M
+Pi5Ex1Cjnw66+A25kc34UvDA4pteJHC+AwTvjLN3nF2jr3l61jEcXULCWpA4rdWT
+dm77dL2KwxXDiYxNAecEFVuG/PRV7J8hHQIFAP3yuSk=
+-----END RSA PUBLIC KEY-----",
+
+            ["Data3"] =
+@"-----BEGIN RSA PUBLIC KEY-----
+MIIBDAKCAQEAvS4XXheufoQvvfTksJhO7JrH1ykMa2ogHtqHhAOZXorLLXvsWfVO
+Q+enFY7kBjKyVbUOlqj3M6Ho2S8QgJTO/Xz3DhD3YlHva59RnIXI2gmSyvrTB0Z/
+GopmJzVfc9o7763CMy/27tS4/dBM9qKs+csvjE6fG470Z025yECgtTtXzltg4pht
+GkjV5+tNjrFt5+wxIydNB56Xow9QCxtpZJ4TstdZvbgq1K06mpLrRTRDxpLPgdDA
+9KKwyewYliU2tl78bU5jcgL3s78KbiJ2VSrlOL2AxI6TpID+kFcDy055JsMkKR2V
+nRPreV08oQchzQ5miTezWUAk7mIcZoFHwwIFAP////8=
+-----END RSA PUBLIC KEY-----",
+
+            ["sd\\sd"] =
+@"-----BEGIN RSA PUBLIC KEY-----
+MIIBCwKCAQEAvbz2HnG3JaP3imwnZJMWCyzW9ZjrgzgxZ/EtzFrzpeYPFdYGmBim
+XFfBarWpREW7M4y6Z7iy4UAbNmF9SLDp6RLiKauI9AxQK3ICYf+2UuDaXO6QeeXM
+JgwQhIugkQFobZOnJLpGT4ynWvH0iR2LO/aFivAPry+bkKXCX9y5zfod2at6j0Ri
+7jJ+SECnWs7rDxsBo/98aJpmoyl+Z24yvBU+sknUVn7giaFPTOet9YvBzNmAing4
+6fBFXV6T4sX+hyCY2Qs2arnH+TSDTUcxK/3lobC7lSy+B+sTinqN0a+SWeaCACYe
+viCKV6AQNxb8J1CHev0OJv9r+bMSy+1kxwIEILt78w==
+-----END RSA PUBLIC KEY-----",
+        };
     }
 }

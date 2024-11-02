@@ -53,6 +53,7 @@ namespace UXM
                     Util.Game.Sekiro => ArchiveKeys.SekiroKeys,
                     Util.Game.SekiroBonus => ArchiveKeys.SekiroBonusKeys,
                     Util.Game.EldenRing => ArchiveKeys.EldenRingKeys,
+                    Util.Game.ArmoredCore6 => ArchiveKeys.ArmoredCore6Keys,
                     _ => throw new NotImplementedException(),
                 };
             }
@@ -226,6 +227,9 @@ namespace UXM
                                 try
                                 {
                                     bytes = header.ReadFile(bdtStream);
+                                    if (header.UnpaddedFileSize != -1 && header.UnpaddedFileSize != 0)
+                                        Array.Resize(ref bytes, (int)header.UnpaddedFileSize);
+
                                     if (unknown)
                                     {
                                         var br = new BinaryReaderEx(false, bytes);

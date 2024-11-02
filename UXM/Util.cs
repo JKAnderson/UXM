@@ -39,6 +39,7 @@ namespace UXM
                 "sekiro.exe" => Game.Sekiro,
                 "DigitalArtwork_MiniSoundtrack.exe" => Game.SekiroBonus,
                 "eldenring.exe" => Game.EldenRing,
+                "armoredcore6.exe" => Game.ArmoredCore6,
                 _ => throw new ArgumentException($"Invalid executable name given: {filename}\r\n"
                     + "Executable file name is expected to be DarkSoulsII.exe, DarkSoulsIII.exe, sekiro.exe, or DigitalArtwork_MiniSoundtrack.exe."),
             };
@@ -52,6 +53,7 @@ namespace UXM
             Sekiro,
             SekiroBonus,
             EldenRing,
+            ArmoredCore6,
         }
     }
 }

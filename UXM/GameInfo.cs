@@ -40,6 +40,7 @@ namespace UXM
                 Util.Game.Sekiro => "Sekiro",
                 Util.Game.SekiroBonus => "SekiroBonus",
                 Util.Game.EldenRing => "EldenRing",
+                Util.Game.ArmoredCore6 => "ArmoredCore6",
                 _ => throw new ArgumentException("Invalid game type."),
             };
 
