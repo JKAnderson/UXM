@@ -1,3 +1,5 @@
+### UXM has been superseded by [Nuxe](https://github.com/JKAnderson/Nuxe). Please use it instead; UXM will no longer be updated.
+
 # UXM
 Enables file modding for DS2, SotFS, DS3, and Sekiro by unpacking game archives and patching the executable to load loose files instead.  
 Requires [.NET 4.7.2](https://www.microsoft.com/net/download/thank-you/net472) - Windows 10 users should already have this.  
